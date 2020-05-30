@@ -1,0 +1,34 @@
+<h1>search page</h1>
+
+<form action="/search">
+    <input type="text" name="q" id="" value="{{q}}">
+
+    <input type="submit" value="검색">
+
+</form>
+
+
+<div class="search_bar">
+    Search word :
+    <form action="." method="POST">
+        {% csrf_token %}
+        {{ form.as_table }}
+        <input type="submit" value="검색">
+
+    </form>
+</div>
+
+<br>
+
+<div class="search_result">
+    {% if object_list %}
+    {% for post in object_list %}
+        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+        <p>{{ post.content }}</p>
+        <!-- blog detail 참고하기 -->
+    {% endfor %}
+
+    {% elif search_term %}
+    {{ search_term }}는 검색 결과가 없습니다!
+    {% endif %}
+</div>
