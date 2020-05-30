@@ -15,7 +15,7 @@ def record_list(request):
 @login_required(login_url='/account/login/')
 def new(request):
     if request.method == "POST":
-        form = RecordForm(request.POST) #request.FILES) -> 이미지 넣으면 필요:
+        form = RecordForm(request.POST) #request.FILES) ->  이미지 넣으면 필요:
         if form.is_valid():
             record = form.save(commit = False)
             record.created_at = timezone.datetime.now()
