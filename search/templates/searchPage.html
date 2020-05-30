@@ -1,21 +1,32 @@
-<h1>search page</h1>
 
-<form action="/search">
-    <input type="text" name="q" id="" value="{{q}}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>search page</h1>
 
-    <input type="submit" value="검색">
-</form>
+    <form action="/search">
+        <input type="text" name="q" id="" value="{{q}}">
+        <input type="submit" value="검색">
+    </form>
 
-<br>
+    <br>
 
-<div class="search_result">
-    {% if object_list %}
-    {% for post in object_list %}
-        <a href="{% url 'detail' %}">{{ post.title }}</a>
-        <p>{{ post.content }}</p>
-    {% endfor %}
+    <div class="search_result">
+        {% if object_list %}
+        {% for post in object_list %}
+            <a href="{% url 'record_detail' post.id %}">{{ post.title }}</a>
+            <p>{{ post.record_body }}</p>
+        {% endfor %}
 
-    {% elif q %}
-    {{ q }}는 검색 결과가 없습니다!
-    {% endif %}
-</div>
+        {% elif q %}
+        {{ q }}는 검색 결과가 없습니다!
+
+        {% endif %}
+    </div>
+</body>
+</html>
