@@ -1,0 +1,20 @@
+<div class= "container">
+    <h1>Sign up</h1>
+
+    <form method="POST" action = "{%url 'signup'%}">
+        {% csrf_token %}
+        username:
+        <br>
+        <input name = "username" type = "text">
+        <br>
+        password:
+        <br>
+        <input name = "password" type = "password">
+        <br>
+        confirm Password:
+        <br>
+        <input name = "confirm password" type = "password">
+        <br><br>
+        <input type = "submit" class ="btn btn-primary" value = "sign up">
+    </form>
+</div>
