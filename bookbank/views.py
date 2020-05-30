@@ -19,6 +19,7 @@ def new(request):
         if form.is_valid():
             record = form.save(commit = False)
             record.created_at = timezone.datetime.now()
+            
             record.updated_at = timezone.datetime.now()
             record.publisher = request.user.username
             record.save()
@@ -66,7 +67,7 @@ def delete(request, record_id):
     if user.is_authenticated and ReadingRecord.objects.get(pk=record_id).publisher == user.username:
         delete_record = get_object_or_404(ReadingRecord, pk = record_id)
         delete_record.delete()
-        return redirect('/')
+        return redirect('record_list')
     elif user.is_authenticated:
         return detail(request, record_id)
     else:
