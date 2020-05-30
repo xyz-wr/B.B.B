@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>record-list</title>
+</head>
+<body>
+    
+    <a href="{%url 'record_new'%}">새로운 글 작성</a> <br>
+    
+    {%for record in records %}
+        <a href="{%url 'record_detail' record.id%}">
+            {{record.title}} <br>
+            {{record.author}} <br>
+            {{record.summary}} <br>
+            {{record.record_title}} <br>
+            {{record.read_at}} <br>
+            {{record.category}} <br>
+            {{record.created_at}} <br>
+            {{record.updated_at}} <br>
+            {{record.publisher}} <br>
+        </a>
+    {%endfor%}
+
+</body>
+</html>

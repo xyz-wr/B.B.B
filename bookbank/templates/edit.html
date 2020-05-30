@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>독서 기록 수정하기</title>
+</head>
+<body>
+    <h1>
+        독서 기록 수정하기
+    </h1>
+    
+    <form action="{%url 'record_update' record_id %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {{form.as_table}}        
+        </table>
+        <button type="submit" class="btn btn-secondary btn-lg btn-block">수정</button>
+    </form>
+
+</body>
+</html>

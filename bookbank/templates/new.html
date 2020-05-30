@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>new record</title>
+</head>
+<body>
+    <h1>
+        새로운 독서 기록 작성하기
+    </h1>
+    <form action="{%url 'record_new'%}" method="POST" enctype="multipart/form-data">
+        {%csrf_token%}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <button type="submit">작성</button>
+    </form>
+</body>
+</html>
