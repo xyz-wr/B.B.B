@@ -1,0 +1,16 @@
+<div class= "container">
+    <h1>login</h1>
+
+    <form method="POST" action= "{%url 'login'%}">
+        {% csrf_token%}
+        username:
+        <br>
+        <input name = "username" type = "text">
+        <br>
+        password:
+        <br>
+        <input name = "password" type = "password">
+        <br><br>
+        <input type = "submit"  value = "submit">
+    </form>
+</div>
