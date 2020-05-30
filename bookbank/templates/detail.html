@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>
+        detail
+    </h1>
+    {{record.title}} <br>
+    {{record.author}} <br>
+    {{record.summary}} <br>
+    {{record.record_title}} <br>
+    {{record.read_at}} <br>
+    {{record.category}} <br>
+    {{record.created_at}} <br>
+    {{record.updated_at}} <br>
+    {{record.publisher}} <br>
+
+    <a href="{%url 'record_edit' record.id %}">글 수정</a>
+    <a href="{%url 'record_delete' record.id %}">글 삭제</a>
+</body>
+</html>
