@@ -8,6 +8,8 @@
 <body>
     
     <a href="{%url 'record_new'%}">새로운 글 작성</a> <br>
+    <a href="{%url 'logout'%}">로그아웃</a> <br>
+    
     
     {%for record in records %}
         <a href="{%url 'record_detail' record.id%}">
