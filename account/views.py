@@ -6,11 +6,11 @@ from django.contrib import auth
 
 def signup(request):
     if request.method == "POST":
-        if request.POST["password"]  ==request.POST["confirm password"]:
+        if request.POST["password"]  == request.POST["confirm password"]:
             user = User.objects.create_user(
                 username = request.POST["username"], password = request.POST["password"])
             auth.login(request, user)
-            return redirect('')
+            return redirect('record_list')
         return render(request, 'signup.html')
 
     return render(request, 'signup.html')
@@ -22,7 +22,7 @@ def login(request):
         user = auth.authenticate(request, username = username, password = password)
         if user is not None:
             auth.login(request, user)
-            return redirect('')
+            return redirect('record_list')
         else:
             return render(request, 'login.html', {'error': 'username or password is incorrect'})
     else:
@@ -31,4 +31,4 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('')
+    return redirect('/')
