@@ -1,25 +1,48 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block container %}
+{% load fontawesome_5 %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>
-        detail
-    </h1>
-    {{record.title}} <br>
-    {{record.author}} <br>
-    {{record.summary}} <br>
-    {{record.record_title}} <br>
-    {{record.read_at}} <br>
-    {{record.category}} <br>
-    {{record.created_at}} <br>
-    {{record.updated_at}} <br>
-    {{record.publisher}} <br>
+    <title> {{record.publisher}} - {{record.record_title}} </title>
 
-    <a href="{%url 'record_edit' record.id %}">글 수정</a>
-    <a href="{%url 'record_delete' record.id %}">글 삭제</a>
+    <style>
+        .card{
+            width: 85%;
+            text-align: center;
+            margin: 5% auto;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'nav.html' %}
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">{{record.title}}</h4>
+            <h5 class="card-subtitle mb-2 text-muted" style="text-align: center;">저자: {{record.author}} &nbsp 분류: {{record.category}}</h5>
+            <h5 class="card-subtitle mb-2 text-muted" style="text-align: right;">기록자: {{record.publisher}} &nbsp 독서일: {{record.read_at}}</h5>
+    
+            <hr>
+            <p class="card-text" style="text-align: right;">생성일 : {{record.created_at}}  &nbsp 수정일 : {{record.updated_at}}</p>
+            <p class="card-text" style="text-align: left;">{{record.record_body|linebreaksbr}}</p>
+
+            <div class="buttonGroup" style="text-align: right;">
+                <button type="button" class="btn btn-secondary"><a href="{%url 'record_edit' record.id %}">글수정</a></button>
+                <button type="button" class="btn btn-warning"><a href="{%url 'record_delete' record.id %}">글삭제</a></button>
+            </div>
+        </div>
+    </div>
+    {%include 'footer.html'%}
 </body>
+
 </html>
+
+{% endblock %}
