@@ -11,7 +11,11 @@ def search(request):
     q = request.GET.get('q') or ""
     
     post_list = ReadingRecord.objects.filter(
-            Q(title__icontains=q) | Q(record_body__icontains=q)
+            Q(title__icontains=q) | Q(record_body__icontains=q) | Q(author__icontains=q)
+             | Q(publisher__icontains=q) | Q(record_title__icontains=q)
         ).distinct()
-        
-    return render(request, 'searchPage.html', {"q": q, "object_list":post_list} )
+
+    if q == "":
+        post_list = []
+
+    return render(request, 'searchPage.html', {"q": q, "object_list":post_list})
