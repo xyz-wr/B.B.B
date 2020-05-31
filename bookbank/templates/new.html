@@ -1,20 +1,46 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block container %}
+{% load fontawesome_5 %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>new record</title>
+    <title>새로운 독서 기록 작성하기</title>
+    <style>
+        .card {
+            width: 85%;
+            text-align: center;
+            margin: 5% auto;
+        }
+    </style>
 </head>
 <body>
-    <h1>
-        새로운 독서 기록 작성하기
-    </h1>
-    <form action="{%url 'record_new'%}" method="POST" enctype="multipart/form-data">
-        {%csrf_token%}
-        <table>
-            {{ form.as_table }}
-        </table>
-        <button type="submit">작성</button>
-    </form>
+    {% include 'nav.html' %}
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">새로운 독서 기록 작성하기</h4>
+            <hr>
+            <form action="{%url 'record_new'%}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group row" style="text-align: left;">
+                    <label for="inputPassword" class="col-sm-2 col-form-label"> {{ field.label_tag }}</label>
+                    <div class="col-sm-10"> {{ field }} </div>
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary btn-lg btn-block">작성하기</button>
+            </form>
+        </div>
+    </div>
+
+
+    {%include 'footer.html'%}
 </body>
 </html>
+
+{% endblock %}
