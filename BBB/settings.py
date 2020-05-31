@@ -22,6 +22,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '00)-=j8#tv)!cj)7%iw1)1i=j6e0o_66ny251-y=3p&oqv_=bj'
 
+
+STATIC_URL = '/static/' 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'bookbank', 'static'), os.path.join(BASE_DIR, 'account', 'static'), os.path.join(BASE_DIR, 'search', 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
