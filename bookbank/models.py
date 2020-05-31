@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -12,7 +13,8 @@ class ReadingRecord(models.Model):
     title = models.CharField(max_length = 200)          # 책 제목
     author = models.CharField(max_length= 100)          # 책 저자
     
-    publisher = models.CharField(max_length = 100)      # 독서 기록 작성자(FK로 변경 필요)
+    publisher = models.ForeignKey(User, on_delete=models.CASCADE)
+    # publisher = models.CharField(max_length = 100)      # 독서 기록 작성자(FK로 변경 필요)
     record_title = models.CharField(max_length = 200)   # 독서 기록 제목
     read_at = models.DateTimeField()                    # 독서 기록 일자(사용자가 정한 날짜) 
     category = models.CharField(max_length = 100, choices = category_list) # 책 카테고리
@@ -28,4 +30,4 @@ class ReadingRecord(models.Model):
 
 
     def summary(self):
-        return self.record_body[:100]
+        return self.record_body[:400]

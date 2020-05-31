@@ -21,7 +21,7 @@ def new(request):
             record.created_at = timezone.datetime.now()
             
             record.updated_at = timezone.datetime.now()
-            record.publisher = request.user.username
+            record.publisher = request.user
             record.save()
             return redirect('record_list')
     else:
@@ -36,7 +36,7 @@ def detail(request, record_id):
 @login_required(login_url='/account/login/')
 def edit(request, record_id):
     user = request.user
-    if user.is_authenticated and ReadingRecord.objects.get(pk=record_id).publisher == user.username:
+    if user.is_authenticated and ReadingRecord.objects.get(pk=record_id).publisher == user:
         form = RecordForm(instance = ReadingRecord.objects.get(pk = record_id))
         return render(request, 'edit.html', {'form':form, 'record_id':record_id})
     elif user.is_authenticated:
@@ -64,7 +64,7 @@ def update(request, record_id):
 
 def delete(request, record_id):
     user = request.user
-    if user.is_authenticated and ReadingRecord.objects.get(pk=record_id).publisher == user.username:
+    if user.is_authenticated and ReadingRecord.objects.get(pk=record_id).publisher == user:
         delete_record = get_object_or_404(ReadingRecord, pk = record_id)
         delete_record.delete()
         return redirect('record_list')

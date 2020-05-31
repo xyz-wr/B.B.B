@@ -1,29 +1,87 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block container %}
+{% load fontawesome_5 %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>record-list</title>
+    {% fontawesome_5_static %}
+    <style>
+        .record-list {
+            width : 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .record-list a {
+            width: 100%;
+        }
+    </style>
 </head>
+
 <body>
-    
-    <a href="{%url 'record_new'%}">새로운 글 작성</a> <br>
-    <a href="{%url 'logout'%}">로그아웃</a> <br>
-    
-    
-    {%for record in records %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'record_list' %}">B.B.B</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <!-- <li class="nav-item active">
+                    <a class="nav-link" href="#"> Home <span class="sr-only">(current)</span></a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> 회원가입 </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> 로그인 </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> 로그아웃 </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> 글쓰기 </a>
+                </li>
+            </ul>
+            <i class="fas fa-user-circle" style="margin-right: 1em; font-size: 1.7em; color: #72c02c;" ></i>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <!-- <a href="{%url 'record_new'%}">새로운 글 작성</a> <br>
+    <a href="{%url 'logout'%}">로그아웃</a> <br> -->
+
+    <div class="record-list">
+
+        {%for record in records %}
         <a href="{%url 'record_detail' record.id%}">
-            {{record.title}} <br>
-            {{record.author}} <br>
-            {{record.summary}} <br>
-            {{record.record_title}} <br>
-            {{record.read_at}} <br>
-            {{record.category}} <br>
-            {{record.created_at}} <br>
-            {{record.updated_at}} <br>
-            {{record.publisher}} <br>
+            <div class="card" style="width: 100%; margin-top: 2em;">
+                <div class="card-body">
+                  <h5 class="card-title">{{record.title}}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">{{record.record_title}}</h6>
+                  <h6 class="card-subtitle mb-2 text-muted">{{record.author}}</h6>
+                  <p class="card-text">{{record.summary}}</p>
+
+                  <a href="#" class="card-link">{{record.publisher}}</a>
+                  <span class = "card-text">{{record.read_at}}</span>
+                </div>
+              </div>
         </a>
-    {%endfor%}
+        {%endfor%}
+    </div>
 
 </body>
+
 </html>
+{% endblock %}

@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'bookbank',
     'account',
     'search',
+    'bootstrap4',
+    'fontawesome_5',
 ]
 
 MIDDLEWARE = [
