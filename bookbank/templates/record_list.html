@@ -26,7 +26,7 @@
     {% include 'nav.html' %}
     <!-- <a href="{%url 'record_new'%}">새로운 글 작성</a> <br>
     <a href="{%url 'logout'%}">로그아웃</a> <br> -->
-    <div class="record-list">
+    <!-- <div class="record-list">
 
         {%for record in records %}
         <a href="{%url 'record_detail' record.id%}">
@@ -43,7 +43,29 @@
               </div>
         </a>
         {%endfor%}
-    </div>
+    </div> -->
+
+
+    <div class="container">
+        <div class="row">
+            {%for record in records %}
+                <div class="card col-md-6 flex-md-row mb-3 shadow-sm " style="max-width: 500px; margin: 7px;">
+                    <a href="{%url 'record_detail' record.id%}">
+                            <div class="card-body d-flex flex-column align-items-start">
+                                <strong class="d-inline-block mb-2 text-primary">{{record.title}}</strong>
+                                <h6 class="text-dark">{{record.record_title}}</h6>
+                                <h6 class="text-dark">{{record.author}}</h6>
+                                <p class="card-text mb-auto">{{record.summary}}</p>
+                                <a href="#" class="card-link">{{record.publisher}}</a>
+                                <span class="card-text">{{record.read_at}}</span>
+                            </div>
+                        
+                    </a>
+                </div>
+                {%endfor%}
+        </div>
+        </div>
+
     {%include 'footer.html'%}
 </body>
 </html>
