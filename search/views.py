@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 
 from django.views.generic.edit import FormView
 from search.forms import PostSearchForm
@@ -11,11 +11,13 @@ def search(request):
     q = request.GET.get('q') or ""
     
     post_list = ReadingRecord.objects.filter(
-            Q(title__icontains=q) | Q(record_body__icontains=q) | Q(author__icontains=q)
-             | Q(publisher__icontains=q) | Q(record_title__icontains=q)
-        ).distinct()
+            Q(title__icontains=q)
+             #| Q(record_body__icontains=q) | Q(author__icontains=q) 
+             #| Q(publisher__icontains=q) | Q(record_title__icontains=q)
+        ).distinct() # 중복사항 제거
+        # 일단은 title만 검색 가능하도록 주석처리. 이후, 콤보 박스를 통해 선택할 수 있도록 구현?
 
-    if q == "":
+    if q == "":         # q가 작성되지 않았을 경우, post_list 비우기
         post_list = []
 
     return render(request, 'searchPage.html', {"q": q, "object_list":post_list})
