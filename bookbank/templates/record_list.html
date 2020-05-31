@@ -56,7 +56,7 @@
                                 <h6 class="text-dark">{{record.record_title}}</h6>
                                 <h6 class="text-dark">{{record.author}}</h6>
                                 <p class="card-text mb-auto">{{record.summary}}</p>
-                                <a href="#" class="card-link">{{record.publisher}}</a>
+                                <a href="{%url 'user' %}?username={{record.publisher}}" class="card-link">{{record.publisher}}</a>
                                 <span class="card-text">{{record.read_at}}</span>
                             </div>
                         
