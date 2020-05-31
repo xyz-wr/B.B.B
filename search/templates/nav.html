@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: fixed; top:0px; width: 100%; z-index: 1;">
     <a class="navbar-brand" href="{% url 'record_list' %}">B.B.B</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,6 +35,7 @@
         </form>
     </div>
 </nav>
+<div class="blank" style="content:''; margin-top: 70px;" ></div>
 
 {% block content %}
 {% endblock %}
