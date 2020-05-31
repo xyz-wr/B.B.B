@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block container %}
+{% load fontawesome_5 %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{{username}} 님의 독서 통장 </title>
+    {% fontawesome_5_static %}
+</head>
+
+<body>
+    {% include 'nav.html' %}
+    <div class="record-list">
+        {%for record in result %}
+        <a href="{%url 'record_detail' record.id%}">
+            <div class="card" style="width: 100%; margin-top: 2em;">
+                <div class="card-body">
+                  <h5 class="card-title">{{record.title}}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">{{record.record_title}}</h6>
+                  <h6 class="card-subtitle mb-2 text-muted">{{record.author}}</h6>
+                  <p class="card-text">{{record.summary}}</p>
+
+                  <a href="#" class="card-link">{{record.publisher}}</a>
+                  <span class = "card-text">{{record.read_at}}</span>
+                </div>
+              </div>
+        </a>
+        {%endfor%}
+    </div>
+    {%include 'footer.html'%}
+</body>
+</html>
+
+{% endblock %}
