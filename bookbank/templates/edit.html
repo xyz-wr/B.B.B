@@ -1,22 +1,48 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block container %}
+{% load fontawesome_5 %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>독서 기록 수정하기</title>
+    <title>수정</title>
+    <style>
+        .card {
+            width: 85%;
+            text-align: center;
+            margin: 5% auto;
+        }
+    </style>
 </head>
-<body>
-    <h1>
-        독서 기록 수정하기
-    </h1>
-    
-    <form action="{%url 'record_update' record_id %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <table>
-            {{form.as_table}}        
-        </table>
-        <button type="submit" class="btn btn-secondary btn-lg btn-block">수정</button>
-    </form>
 
+<body>
+    {% include 'nav.html' %}
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title"> "{{form.title.value}}" 수정</h4>
+            <hr>
+            <form action="{%url 'record_update' record_id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group row" style="text-align: left;">
+                    <label for="inputPassword" class="col-sm-2 col-form-label"> {{ field.label_tag }}</label>
+                    <div class="col-sm-10"> {{ field }} </div>
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-secondary btn-lg btn-block">수정</button>
+            </form>
+
+        </div>
+    </div>
+
+    {%include 'footer.html'%}
 </body>
+
 </html>
+{% endblock %}
