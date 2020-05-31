@@ -1,0 +1,8 @@
+asgiref==3.2.7
+beautifulsoup4==4.9.1
+Django==3.0.6
+django-bootstrap4==1.1.1
+django-fontawesome-5==1.0.18
+pytz==2020.1
+soupsieve==2.0.1
+sqlparse==0.3.1
