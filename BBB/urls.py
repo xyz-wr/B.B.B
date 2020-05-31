@@ -8,4 +8,5 @@ urlpatterns = [
     path('records/', include('bookbank.urls')),
     path('account/', include('account.urls')),
     path('search/', include('search.urls')),
+    path('user/', include('personal.urls')),
 ]

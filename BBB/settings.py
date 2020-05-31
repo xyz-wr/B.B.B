@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'bookbank',
     'account',
     'search',
+    'personal',
     'bootstrap4',
     'fontawesome_5',
 ]
