@@ -10,6 +10,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>B.B.B. Search</title>
+    <script>
+        function redirectRecord(record_id) {
+            window.location.href = "/records/"+record_id;
+        }
+
+        function mouseover(obj) {
+            obj.className= "card col-md-11 flex-md-row mb-3 shadow-lg";
+        }
+
+        function mouseout(obj) {
+            obj.className = "card col-md-11 flex-md-row mb-3 shadow-sm";
+        }
+    </script>
 </head>
 
 <body>
@@ -29,8 +42,8 @@
             <div class="search_result">
                 {% if object_list%}
                     {% for post in object_list %}
-                        <div class="card" style="width: 100%; margin-top: 2em; border: 2px solid gray;">
-                            <div class="card-body">
+                        <div class="card col-md-6 flex-md-row mb-3 shadow-sm" style="max-width: 1000px; margin-top: 2em; border: 2px solid gray;" onmouseover="mouseover(this)" onmouseout="mouseout(this)">
+                            <div class="card-body" onclick="redirectRecord({{post.id}})">
                                 <h5 class="card-title"><a href="{% url 'record_detail' post.id %}">{{ post.title }}</a></h5>
                                 <h6 class="card-subtitle mb-2 text-muted">{{post.record_title}}</h6>
                                 <h6 class="card-subtitle mb-2 text-muted">{{post.author}}</h6>
