@@ -28,9 +28,11 @@
                 </li>
                 {% endif %}
         </ul>
+        {% if user.is_authenticated %}
         <a href="{%url 'user' %}?username={{user.username}}">
             <i class="fas fa-user-circle" style="margin-right: 1em; font-size: 1.7em; color: #72c02c;" ></i>
         </a>
+        {% endif %}
         <form class="form-inline my-2 my-lg-0" method = "get" action = "{% url 'search' %}">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name = "q">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
