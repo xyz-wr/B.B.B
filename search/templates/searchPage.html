@@ -42,7 +42,7 @@
 
             <div class="search_result">
                 {% if object_list%}
-                    {% for post in object_list %}
+                    {% for post in post_counts %}
                         <div class="card col-md-12 flex-md-row mb-3 shadow-sm" style="margin-top: 2em; border: 2px solid gray;" onmouseover="mouseover(this)" onmouseout="mouseout(this)">
                             <div class="card-body d-flex flex-column align-items-start" onclick="redirectRecord({{post.id}})">
                                 <div class="row no-gutters" style="width: 100%;">
@@ -65,6 +65,18 @@
                             </div>
                         </div>
                     {% endfor %}
+
+                    <div>
+                        {% if post_counts.has_previous %}
+                        <a href="?q={{q}}&page={{post_counts.previous_page_number}}">previous</a>
+                        {% endif %}
+                        <span>{{ post_counts.number }}</span>
+                        <span>/</span>
+                        <span>{{ post_counts.paginator.num_pages }}</span>
+                        {% if post_counts.has_next %}
+                        <a href="?q={{q}}&page={{post_counts.next_page_number}}">next</a>
+                        {% endif %}
+                    </div>
 
                 {% elif q %}
                     "{{ q }}"는 검색 결과가 없습니다!
