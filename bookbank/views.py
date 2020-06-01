@@ -4,12 +4,18 @@ from django.utils import timezone
 from .form import RecordForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 
 def record_list(request):
     records = ReadingRecord.objects.all()
-    return render(request, 'record_list.html', {'records':records})
+    paginator = Paginator(records, 10)
+    page= request.GET.get('page')
+    records_page = paginator.get_page(page)
+    start = max(int(page)-5, 1)
+    end = min(int(page)+5, paginator.num_pages)
+    return render(request, 'record_list.html', {'records':records, 'records_page' : records_page, 'range' : [i for i in range(start, end+1)]})
 
 # def recoed_request(request, username):
 
