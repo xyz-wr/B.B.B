@@ -11,10 +11,14 @@
     <title> {{record.publisher}} - {{record.record_title}} </title>
 
     <style>
-        .card{
+        .card {
             width: 85%;
             text-align: center;
             margin: 5% auto;
+        }
+
+        #imagebox {
+            margin-left: 10px;
         }
     </style>
 </head>
@@ -24,12 +28,36 @@
 
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">{{record.title}}</h4>
-            <h5 class="card-subtitle mb-2 text-muted" style="text-align: center;">저자: {{record.author}} &nbsp 분류: {{record.category}}</h5>
-            <h5 class="card-subtitle mb-2 text-muted" style="text-align: right;">기록자: {{record.publisher}} &nbsp 독서일: {{record.read_at}}</h5>
-    
+            <!-- 이미지를 수직으로 -->
+                <div id="imagebox" class="col-md-4 shadow" style="display: inline; max-width: 100px; max-height: 200px;">
+                    {% if record.rep_img %}
+                    <img class="rep-img" src="{{ record.rep_img.url }}" style="max-width: 100px; max-height: 200px; margin-bottom: 10px;">
+                    {% endif %}
+                </div>
+                <h4 class="card-title">{{record.title}}</h4>
+                <h5 class="card-subtitle mb-2 text-muted" style="text-align: center;">저자: {{record.author}} &nbsp
+                    분류: {{record.category}}</h5>
+                <h5 class="card-subtitle mb-2 text-muted" style="text-align: center;">기록자: {{record.publisher}}
+                    &nbsp 독서일: {{record.read_at}}</h5>
+
+            <!-- 이미지를 나란히 -->
+            <!-- <div class="row no-gutters" style="width: 100%;">
+                <div id="imagebox" class="col-md-4 shadow" style="display: inline; max-width: 100px; max-height: 200px;">
+                    {% if record.rep_img %}
+                    <img class="rep-img" src="{{ record.rep_img.url }}" style="max-width: 100px; max-height: 200px;">
+                    {% endif %}
+                </div>
+                <div class="col-md-10">
+                    <h4 class="card-title">{{record.title}}</h4>
+                    <h5 class="card-subtitle mb-2 text-muted" style="text-align: center;">저자: {{record.author}} &nbsp
+                        분류: {{record.category}}</h5>
+                    <h5 class="card-subtitle mb-2 text-muted" style="text-align: center;">기록자: {{record.publisher}}
+                        &nbsp 독서일: {{record.read_at}}</h5>
+                </div>
+            </div> -->
             <hr>
-            <p class="card-text" style="text-align: right;">생성일 : {{record.created_at}}  &nbsp 수정일 : {{record.updated_at}}</p>
+            <p class="card-text" style="text-align: right;">생성일 : {{record.created_at}} &nbsp 수정일 :
+                {{record.updated_at}}</p>
             <p class="card-text" style="text-align: left;">{{record.record_body|linebreaksbr}}</p>
 
             <div class="buttonGroup" style="text-align: right;">
