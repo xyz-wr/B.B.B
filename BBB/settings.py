@@ -10,23 +10,30 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
-import os
+import os, json
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+secret_file = os.path.join(BASE_DIR, 'secrets.json') # secrets.json 파일 위치를 명시
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
+with open(secret_file) as f:
+    secrets = json.loads(f.read())
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '00)-=j8#tv)!cj)7%iw1)1i=j6e0o_66ny251-y=3p&oqv_=bj'
+def get_secret(setting, secrets=secrets):
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = "Set the {} environment variable".format(setting)
 
+SECRET_KEY = get_secret("SECRET_KEY")
 
 STATIC_URL = '/static/' 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'bookbank', 'static'), os.path.join(BASE_DIR, 'account', 'static'), os.path.join(BASE_DIR, 'search', 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -117,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
