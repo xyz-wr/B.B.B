@@ -26,7 +26,12 @@ def login(request):
         else:
             return render(request, 'login.html', {'error': 'username or password is incorrect'})
     else:
-        return render(request, 'login.html')
+        try:
+            user = request.user
+            auth.login(request, user)
+            return redirect('record_list')
+        except:
+            pass
     return render(request, 'login.html')
 
 def logout(request):
