@@ -15,7 +15,7 @@ def record_list(request):
 @login_required(login_url='/account/login/')
 def new(request):
     if request.method == "POST":
-        form = RecordForm(request.POST) #request.FILES) ->  이미지 넣으면 필요:
+        form = RecordForm(request.POST, request.FILES)
         if form.is_valid():
             record = form.save(commit = False)
             record.created_at = timezone.datetime.now()
@@ -49,6 +49,10 @@ def update(request, record_id):
     update_record = get_object_or_404(ReadingRecord, pk = record_id)
     update_record.title = request.POST['title']
     
+    try:
+        update_record.rep_img = request.FILES['rep_img']
+    except:
+        pass
     update_record.author = request.POST['author']
     update_record.record_title = request.POST['record_title']
     update_record.read_at = request.POST['read_at']

@@ -1,5 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
+import os
+from uuid import uuid4
+from django.utils import timezone
+
+def date_upload_to(instance, filename):
+    ymd_path = timezone.now().strftime('%Y/%m/%d')
+    uuid_name = uuid4().hex
+    extension = os.path.splitext(filename)[-1].lower()
+    return '/'.join([ymd_path, uuid_name + extension])
 
 # Create your models here.
 class ReadingRecord(models.Model):
@@ -57,13 +66,6 @@ class ReadingRecord(models.Model):
         )
     )
 
-
-
-
-
-
-
-
     title = models.CharField(max_length = 200)          # 책 제목
     author = models.CharField(max_length= 100)          # 책 저자
     
@@ -77,7 +79,7 @@ class ReadingRecord(models.Model):
     created_at = models.DateTimeField()                 # 독서 기록 최초 일자
     updated_at = models.DateTimeField()                 # 독서 기록 갱신 일자
 
-    # rep_img = models.ImageField(upload_to=date_upload_to, blank = True, default = None)
+    rep_img = models.ImageField(upload_to=date_upload_to, blank = True, default = None)
     
     def __str__(self):
         return self.record_title

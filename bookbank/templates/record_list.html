@@ -19,6 +19,9 @@
         .record-list a {
             width: 100%;
         }
+        .rep-img {
+            max-width: 100%;
+        }
     </style>
 
     <script>
@@ -27,11 +30,11 @@
         }
 
         function mouseover(obj) {
-            obj.className= "card col-md-6 flex-md-row mb-3 shadow-lg";
+            obj.className= "card col-md-11 flex-md-row mb-3 shadow-lg";
         }
 
         function mouseout(obj) {
-            obj.className = "card col-md-6 flex-md-row mb-3 shadow-sm";
+            obj.className = "card col-md-11 flex-md-row mb-3 shadow-sm";
         }
     </script>
 </head>
@@ -63,14 +66,23 @@
     <div class="container">
         <div class="row">
             {%for record in records %}
-                <div class="card col-md-6 flex-md-row mb-3 shadow-sm " style="max-width: 500px; margin: 7px;"  onmouseover="mouseover(this)" onmouseout="mouseout(this)">
+                <div class="card col-md-11 flex-md-row mb-3 shadow-sm " style="max-width: 1000px; margin: 7px;"  onmouseover="mouseover(this)" onmouseout="mouseout(this)">
                     <div class="card-body d-flex flex-column align-items-start" onclick="redirectRecord({{record.id}})">
-                        <strong class="d-inline-block mb-2 text-primary">{{record.title}}</strong>
-                        <h6 class="text-dark">{{record.record_title}}</h6>
-                        <h6 class="text-dark">{{record.author}}</h6>
-                        <p class="card-text mb-auto">{{record.summary}}</p>
-                        <a href="{%url 'user' %}?username={{record.publisher}}" class="card-link">{{record.publisher}}</a>
-                        <span class="card-text">{{record.read_at}}</span>
+                        <div class="row no-gutters">
+                            <div class="col-md-4 shadow" style="display: inline; max-width: 100px; max-height: 200px;margin-right: 10px;">
+                            {% if record.rep_img %}
+                                <img class="rep-img" src="{{ record.rep_img.url }}">
+                            {% endif %}
+                            </div>
+                            <div class="col-md-7">
+                                <strong class="d-inline-block mb-2 text-primary">{{record.title}}</strong>
+                                <h6 class="text-dark">{{record.record_title}}</h6>
+                                <h6 class="text-dark">{{record.author}}</h6>
+                                <p class="card-text mb-auto">{{record.summary}}</p>
+                                <a href="{%url 'user' %}?username={{record.publisher}}" class="card-link">{{record.publisher}}</a>
+                                <span class="card-text">{{record.read_at}}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 {%endfor%}
