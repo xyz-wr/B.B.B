@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 
@@ -43,13 +44,24 @@
                 {% if object_list%}
                     {% for post in object_list %}
                         <div class="card col-md-12 flex-md-row mb-3 shadow-sm" style="margin-top: 2em; border: 2px solid gray;" onmouseover="mouseover(this)" onmouseout="mouseout(this)">
-                            <div class="card-body" onclick="redirectRecord({{post.id}})">
-                                <h5 class="card-title"><a href="{% url 'record_detail' post.id %}">{{ post.title }}</a></h5>
-                                <h6 class="card-subtitle mb-2 text-muted">{{post.record_title}}</h6>
-                                <h6 class="card-subtitle mb-2 text-muted">{{post.author}}</h6>
-                                <p class="card-text">{{post.summary}}</p>
-                                <a href="#" class="card-link">{{post.publisher}}</a>
-                                <span class = "card-text">{{post.read_at}}</span>
+                            <div class="card-body d-flex flex-column align-items-start" onclick="redirectRecord({{post.id}})">
+                                <div class="row no-gutters" style="width: 100%;">
+                                    <div class="col-md-4 shadow" style="display: inline; max-width: 100px; max-height: 200px;margin-right: 10px;">
+                                        {% if post.rep_img %}
+                                        <img class="rep-img" src="{{ post.rep_img.url }}" style="max-width: 100px; max-height: 200px;margin-right: 10px;">
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-10" >
+                                        <div class="card-body">
+                                            <h5 class="card-title"><a href="{% url 'record_detail' post.id %}">{{ post.title }}</a></h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">{{post.record_title}}</h6>
+                                            <h6 class="card-subtitle mb-2 text-muted">{{post.author}}</h6>
+                                            <p class="card-text">{{post.summary}}</p>
+                                            <a href="{%url 'user' %}?username={{post.publisher}}" class="card-link">{{post.publisher}}</a>
+                                            <span class="card-text">{{post.read_at}}</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     {% endfor %}
