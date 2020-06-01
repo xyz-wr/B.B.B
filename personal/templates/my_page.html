@@ -8,28 +8,127 @@
 <html lang="en">
 
 <head>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
+
     <title>{{username}} 님의 독서 통장 </title>
+    <style>
+        .panel-table .panel-body{
+        padding:0;
+        }
+
+        .panel-table .panel-body .table-bordered{
+        border-style: none;
+        margin:0;
+        }
+
+        .panel-table .panel-body .table-bordered > thead > tr > th:first-of-type {
+            text-align:center;
+            width: 100px;
+        }
+
+        .panel-table .panel-body .table-bordered > thead > tr > th:last-of-type,
+        .panel-table .panel-body .table-bordered > tbody > tr > td:last-of-type {
+        border-right: 0px;
+        }
+
+        .panel-table .panel-body .table-bordered > thead > tr > th:first-of-type,
+        .panel-table .panel-body .table-bordered > tbody > tr > td:first-of-type {
+        border-left: 0px;
+        }
+
+        .panel-table .panel-body .table-bordered > tbody > tr:first-of-type > td{
+        border-bottom: 0px;
+        }
+
+        .panel-table .panel-body .table-bordered > thead > tr:first-of-type > th{
+        border-top: 0px;
+        }
+
+        .panel-table .panel-footer .pagination{
+        margin:0; 
+        }
+
+        .panel-table .panel-footer .col{
+        line-height: 34px;
+        height: 34px;
+        }
+
+        .panel-table .panel-heading .col h3{
+        line-height: 30px;
+        height: 30px;
+        }
+
+        .panel-table .panel-body .table-bordered > tbody > tr > td{
+        line-height: 34px;
+        }
+
+
+    </style>
     {% fontawesome_5_static %}
 </head>
 
 <body>
     {% include 'nav.html' %}
     <div class="record-list">
-        {%for record in result %}
-        <a href="{%url 'record_detail' record.id%}">
-            <div class="card" style="width: 100%; margin-top: 2em;">
-                <div class="card-body">
-                  <h5 class="card-title">{{record.title}}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">{{record.record_title}}</h6>
-                  <h6 class="card-subtitle mb-2 text-muted">{{record.author}}</h6>
-                  <p class="card-text">{{record.summary}}</p>
 
-                  <a href="#" class="card-link">{{record.publisher}}</a>
-                  <span class = "card-text">{{record.read_at}}</span>
-                </div>
-              </div>
-        </a>
-        {%endfor%}
+              <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="panel panel-default panel-table">
+                          <div class="panel-heading">
+                            <div class="row">
+                              <div class="col col-xs-6">
+                                <h3 class="panel-title">
+                                    {{username}} 님의 독서 통장
+                                </h3>
+                                <hr>
+                              </div>
+
+                            </div>
+                          </div>
+                          <div class="panel-body">
+                            <table class="table table-striped table-bordered table-list">
+                              <thead>
+                                <tr>                       
+                                    <th><em class="fa fa-cog"></em></th>
+                                    <th class="hidden-xs">Title</th>
+                                    <th>Read at</th>
+                                    <th>Author</th>
+                                    <th>Category</th>
+                                </tr>  
+                              </thead>
+                             
+                              <tbody>
+                                      
+                                        {%for record in result %}
+                                        <tr>
+                                        <td align="center">
+                                          <button type = "button" class="btn btn-danger"><a href="{%url 'record_delete' record.id %}"><em class="fa fa-trash"></em></a></button>
+                                          
+                                        </td>
+                                        
+                                        <td class="hidden-xs">{{record.title}}</td>
+                                        <td>{{record.read_at}}</td>
+                                        <td>{{record.author}}</td>
+                                        <td>{{record.category}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                      
+                                    </tbody>
+                                 
+                            </table>
+                        
+                          </div>
+                          <div class="panel-footer">
+                            <div class="row">
+                              <div class="col col-xs-4" style="text-align: right; font-weight:bolder; font-size:large">B.B.B
+                              </div>
+                              
+                            </div>
+                          </div>
+                        </div>
+
     </div>
     {%include 'footer.html'%}
 </body>
