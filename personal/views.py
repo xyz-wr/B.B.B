@@ -4,6 +4,8 @@ from bookbank.models import ReadingRecord
 # Create your views here.
 def user_page(request):
     username = request.GET.get('username')
+    if username == None or username == "":
+        username = request.user.username
     records = ReadingRecord.objects.all()
     result = []
     for record in records:

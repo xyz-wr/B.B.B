@@ -104,7 +104,7 @@
                                         {%for record in result %}
                                         <tr>
                                         <td align="center">
-                                          <button type = "button" class="btn btn-danger"><a href="{%url 'record_delete' record.id %}"><em class="fa fa-trash"></em></a></button>
+                                          <button type = "button" class="btn btn-danger"><a href="{%url 'record_delete' record.id %}?where=user_page"><em class="fa fa-trash"></em></a></button>
                                           
                                         </td>
                                         

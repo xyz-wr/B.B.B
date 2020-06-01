@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import ReadingRecord
 from django.utils import timezone
 from .form import RecordForm
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -68,10 +69,18 @@ def update(request, record_id):
 
 def delete(request, record_id):
     user = request.user
+    where = ""
+    try:
+        where = request.GET.get('where')
+    except:
+        pass
     if user.is_authenticated and ReadingRecord.objects.get(pk=record_id).publisher == user:
         delete_record = get_object_or_404(ReadingRecord, pk = record_id)
         delete_record.delete()
-        return redirect('record_list')
+        if where == 'user_page':
+            return redirect("user")
+        else:
+            return redirect('record_list')
     elif user.is_authenticated:
         return detail(request, record_id)
     else:
