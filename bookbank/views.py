@@ -12,6 +12,8 @@ def record_list(request):
     records = ReadingRecord.objects.all()
     paginator = Paginator(records, 10)
     page= request.GET.get('page')
+    if page == "" or page == None:
+        page = 1
     records_page = paginator.get_page(page)
     start = max(int(page)-5, 1)
     end = min(int(page)+5, paginator.num_pages)
