@@ -17,7 +17,7 @@
         }
 
         .main {
-            margin-top: 5%;
+            margin-top: 7%;
             margin-left: auto;
             margin-right: auto;
         }
@@ -25,15 +25,16 @@
     </style>
 </head>
 <body>
-    <div class="card mb-3 shadow p-3 mb-5 bg-white rounded main" style="max-width: 80%;">
+    <div class="card shadow p-3 mb-5 bg-white rounded main" style="max-width: 80%;">
         <div class="row no-gutters">
-            <div class="col-md-8" >
+            <div class="col-md-7" >
               <img src="{% static 'readingPeople.jpg' %}" class="card-img" alt="...">
             </div>
-          <div class="col-md-3">
+          <div class="col-md-5">
             <div class="card-body">
               <h3 class="card-title">Login B.B.B</h3>
               <p class="card-text" style="margin-top: 2em;"> 당신만의 독서 기록을 남겨보는 경험을 하실 수 있어요! 그리고 그 경험을 다른 사람들과 공유해보세요!              
+                {% include 'alert.html' %}
                 <form method="POST" action= "{%url 'login'%}">
                 {% csrf_token%}
                 <div class="input-group" style="margin-bottom: 5px;">
