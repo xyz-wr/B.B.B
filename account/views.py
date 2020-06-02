@@ -37,11 +37,8 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             return redirect('record_list')
-        elif user is None:
-            messages.error(request, "존재하지 않는 사용자입니다.")
-            return render(request, 'login.html')
         else:
-            messages.error(request, "password가 올바르지 않습니다.")
+            messages.error(request, "username 혹은 password가 올바르지 않습니다.")
             return render(request, 'login.html', {'error': 'username or password is incorrect'})
     else:
         try:
