@@ -164,6 +164,7 @@
         </form>
     </div> -->
     <br>
+    {% include 'alert.html' %}
     <div class="container" style="margin-top: 10%;">
         <form method="POST" action="{%url 'signup'%}">
             {% csrf_token %}
