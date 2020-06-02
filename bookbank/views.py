@@ -68,10 +68,6 @@ def update(request, record_id):
     update_record.category = request.POST['category']
     update_record.record_body = request.POST['record_body']
     update_record.updated_at = timezone.datetime.now()
-    # try:
-    #     update_record.rep_img = request.FILES['rep_img']
-    # except:
-    #     pass
     update_record.save()
     return redirect('record_detail', update_record.id)
 
