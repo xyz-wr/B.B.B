@@ -18,7 +18,9 @@
         }
 
         #imagebox {
-            margin-left: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -31,7 +33,7 @@
     <div class="card">
         <div class="card-body">
             <!-- 이미지를 수직으로 -->
-                <div id="imagebox" class="col-md-4 shadow" style="display: inline; max-width: 100px; max-height: 200px;">
+                <div id="imagebox" class="col-md-4 shadow" style="display: inline-box; width:fit-content; height: fit-content;">
                     {% if record.rep_img %}
                     <img class="rep-img" src="{{ record.rep_img.url }}" style="max-width: 100px; max-height: 200px; margin-bottom: 10px;">
                     {% endif %}
