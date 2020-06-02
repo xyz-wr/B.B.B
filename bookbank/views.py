@@ -5,6 +5,7 @@ from .form import RecordForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib import messages
 
 # Create your views here.
 
@@ -32,10 +33,10 @@ def new(request):
             record.updated_at = timezone.datetime.now()
             record.publisher = request.user
             record.save()
+            messages.success(request,'새 독서 기록이 등록되었습니다.')
             return redirect('record_list')
-    else:
-        form = RecordForm()
-        return render(request, 'new.html', {'form':form})
+    form = RecordForm()
+    return render(request, 'new.html', {'form':form})
 
 def detail(request, record_id):
     record = get_object_or_404(ReadingRecord, pk = record_id)
@@ -47,10 +48,14 @@ def edit(request, record_id):
     user = request.user
     if user.is_authenticated and ReadingRecord.objects.get(pk=record_id).publisher == user:
         form = RecordForm(instance = ReadingRecord.objects.get(pk = record_id))
+        
+        messages.success(request,'독서 기록이 수정되었습니다.')
         return render(request, 'edit.html', {'form':form, 'record_id':record_id})
     elif user.is_authenticated:
+        messages.error(request, "본인의 글만 수정할 수 있습니다.")
         return detail(request, record_id)
     else:
+        messages.error(request, "로그인 후, 글을 수정할 수 있습니다.")
         return redirect("login")
 
 @login_required(login_url='/account/login/')
@@ -81,11 +86,14 @@ def delete(request, record_id):
     if user.is_authenticated and ReadingRecord.objects.get(pk=record_id).publisher == user:
         delete_record = get_object_or_404(ReadingRecord, pk = record_id)
         delete_record.delete()
+        messages.success(request,"독서 기록이 삭제되었습니다.")
         if where == 'user_page':
             return redirect("user")
         else:
             return redirect('record_list')
     elif user.is_authenticated:
+        messages.error(request,"본인의 글만 삭제할 수 있습니다.")
         return detail(request, record_id)
     else:
+        messages.error(request, "로그인 후, 글을 수정할 수 있습니다.")
         return redirect("login")
