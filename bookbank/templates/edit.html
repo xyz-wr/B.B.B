@@ -20,6 +20,7 @@
 
 <body>
     {% include 'nav.html' %}
+    {% load octicons %}
 
     <div class="card">
         <div class="card-body">
@@ -27,17 +28,60 @@
             <hr>
             <form action="{%url 'record_update' record_id %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                {% for field in form %}
-                <div class="form-group row" style="text-align: left;">
-                    <label for="inputPassword" class="col-sm-2 col-form-label"> {{ field.label_tag }}</label>
-                    <div class="col-sm-10"> {{ field }} </div>
+                <div style="text-align: left;">
+                    <div class="form-group mb-2">
+                        <label for="inputField" class="col-sm-2 col-form-label"> {% octicon "book" %} 책 제목 </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" value="{{form.title.value}}" name="title" style="width: 400px;">
+                        </div>
+                    </div>
+                
+                    <div class="form-group mb-2">
+                        <label for="inputField" class="col-sm-2 col-form-label"> {% octicon "person" %} 저자 </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" value="{{form.author.value}}" name="author" style="width: 400px;">
+                        </div>
+                    </div>
+                
+                    <div class="form-group mb-2">
+                        <label for="inputField" class="col-sm-2 col-form-label"> {% octicon "pencil" %} 독서 기록 제목 </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" value="{{form.record_title.value}}" name="record_title"style="width: 400px;">
+                        </div>
+                    </div>
+                
+                    <div class="form-group mb-2">
+                        <label for="inputField" class="col-sm-2 col-form-label"> {% octicon "watch" %} 기록 일자 </label>
+                        <div class="col-sm-10">
+                            {{form.read_at}}
+                        </div>
+                    </div>
+                
+                    <div class="form-group mb-2">
+                        <label for="inputField" class="col-sm-2 col-form-label"> {% octicon "three-bars" %} 책 카테고리 </label>
+                        <div class="col-sm-10">
+                            <select class="custom-select" name="category" style="width: 400px;">
+                                <option value="{{form.category}}"></option>
+                                <!-- 놀라운 곳 -->
+                            </select>
+                        </div>
+                    </div>
+                
+                    <div class="form-group mb-2">
+                        <label for="inputField" class="col-sm-2 col-form-label"> {% octicon "file" %} 독서 기록 내용 </label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" rows="10" name="record_body">{{form.record_body.value}}</textarea>
+                        </div>
+                    </div>
+                
+                    <br>
+                    <button type="submit" class="btn btn-secondary btn-lg btn-block">수정</button>
                 </div>
-                {% endfor %}
-                <button type="submit" class="btn btn-secondary btn-lg btn-block" onclick="this.disabled=true; this.form.submit();">수정</button>
             </form>
-
+    
         </div>
     </div>
+      
 
     {%include 'footer.html'%}
 </body>

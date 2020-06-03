@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'personal',
     'bootstrap4',
     'fontawesome_5',
+    'octicons',
 ]
 
 MIDDLEWARE = [
