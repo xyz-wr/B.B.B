@@ -125,11 +125,11 @@
                   {%for record in pages %}
                   <tr>
                     <td align="center">
-                      <button type="button" class="btn btn-danger btn-sm"><a href="{%url 'record_delete' record.id %}"
-                          style="color: white;">DELETE</a></button>
+                      <button type="button" class="btn btn-danger btn-sm" ><a href ="{%url 'record_delete' record.id %}"><em class="fa fa-trash" style = "color : white;"></em></a>
+                        </a></button>
 
                     </td>
-
+                    
                     <td class="hidden-xs" width=400 style="word-break:break-all">{{record.title}}</td>
                     <td width=280 style="word-break:break-all">{{record.read_at}}</td>
                     <td width=250 style="word-break:break-all">{{record.author}}</td>
@@ -141,17 +141,15 @@
                   {% endfor %}
                   {% for _ in left %}
                   <tr>
-                    <td align="center">
-                      <button type="button" class="btn btn-danger btn-sm"><a href=""
-                          style="color: white;">DELETE</a></button>
-
-                    </td>
-
+                    
+                    <td align="center" height = 50></td>
                     <td class="hidden-xs" width=400 style="word-break:break-all"></td>
                     <td width=280 style="word-break:break-all"></td>
                     <td width=250 style="word-break:break-all"></td>
                     <td width=280 style="word-break:break-all"></td>
+                    
                     {% endfor %}
+                  
                 </tbody>
 
               </table>
@@ -161,7 +159,7 @@
               <div class="row">
                 <div class="col col-xs-4" style="text-align: right; font-weight:bolder; font-size:large">B.B.B
 
-                  <!-- <button type ="button" class="btn btn-secondary btn-sm" style = "float: left; margin-top: 10px;"><a href = "{%url 'record_new'%}" style = "color: white;">글쓰기</a></button> -->
+              
                 </div>
               </div>
             </div>
@@ -211,4 +209,4 @@
 
 </html>
 
-{% endblock %}
+{% endblock %}  
