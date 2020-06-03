@@ -8,130 +8,207 @@
 <html lang="en">
 
 <head>
-    
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
 
-    <title>{{username}} 님의 독서 통장 </title>
-    <style>
-        .panel-table .panel-body{
-        padding:0;
-        }
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet'
+    type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <title>{{username}} 님의 독서 통장 </title>
+  <style>
+    .selector {
+      word-break: break-all;
+    }
 
-        .panel-table .panel-body .table-bordered{
-        border-style: none;
-        margin:0;
-        }
+    .panel-table .panel-body {
+      padding: 0;
+    }
 
-        .panel-table .panel-body .table-bordered > thead > tr > th:first-of-type {
-            text-align:center;
-            width: 100px;
-        }
+    .panel-table .panel-body .table-bordered {
+      border-style: none;
+      margin: 0;
+    }
 
-        .panel-table .panel-body .table-bordered > thead > tr > th:last-of-type,
-        .panel-table .panel-body .table-bordered > tbody > tr > td:last-of-type {
-        border-right: 0px;
-        }
+    .panel-table .panel-body .table-bordered>thead>tr>th:first-of-type {
+      text-align: center;
+      width: 100px;
+    }
 
-        .panel-table .panel-body .table-bordered > thead > tr > th:first-of-type,
-        .panel-table .panel-body .table-bordered > tbody > tr > td:first-of-type {
-        border-left: 0px;
-        }
+    .panel-table .panel-body .table-bordered>thead>tr>th:last-of-type,
+    .panel-table .panel-body .table-bordered>tbody>tr>td:last-of-type {
+      border-right: 0px;
+    }
 
-        .panel-table .panel-body .table-bordered > tbody > tr:first-of-type > td{
-        border-bottom: 0px;
-        }
+    .panel-table .panel-body .table-bordered>thead>tr>th:first-of-type,
+    .panel-table .panel-body .table-bordered>tbody>tr>td:first-of-type {
+      border-left: 0px;
+    }
 
-        .panel-table .panel-body .table-bordered > thead > tr:first-of-type > th{
-        border-top: 0px;
-        }
+    .panel-table .panel-body .table-bordered>tbody>tr:first-of-type>td {
+      border-bottom: 0px;
+    }
 
-        .panel-table .panel-footer .pagination{
-        margin:0; 
-        }
+    .panel-table .panel-body .table-bordered>thead>tr:first-of-type>th {
+      border-top: 0px;
+    }
 
-        .panel-table .panel-footer .col{
-        line-height: 34px;
-        height: 34px;
-        }
+    .panel-table .panel-footer .pagination {
+      margin: 0;
+    }
 
-        .panel-table .panel-heading .col h3{
-        line-height: 30px;
-        height: 30px;
-        }
+    .panel-table .panel-footer .col {
+      line-height: 34px;
+      height: 34px;
+    }
 
-        .panel-table .panel-body .table-bordered > tbody > tr > td{
-        line-height: 34px;
-        }
+    .panel-table .panel-heading .col h3 {
+      line-height: 30px;
+      height: 30px;
+    }
 
+    .panel-table .panel-body .table-bordered>tbody>tr>td {
+      line-height: 34px;
+    }
 
-    </style>
-    {% fontawesome_5_static %}
+    .pagination_wrapper {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .pagination_wrapper ul {
+      display: inline-block;
+    }
+
+    .pagination_wrapper li {
+      display: inline-block;
+    }
+  </style>
+  {% fontawesome_5_static %}
 </head>
 
 <body>
-    {% include 'nav.html' %}
-    <div class="record-list">
+  {% include 'nav.html' %}
+  <div class="record-list">
 
-              <div class="container">
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1">
-                        <div class="panel panel-default panel-table">
-                          <div class="panel-heading">
-                            <div class="row">
-                              <div class="col col-xs-6">
-                                <h3 class="panel-title">
-                                    {{username}} 님의 독서 통장
-                                </h3>
-                                <hr>
-                              </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-md-offset-1">
+          <div class="panel panel-default panel-table">
+            <div class="panel-heading">
+              <div class="row">
+                <div class="col col-xs-6">
 
-                            </div>
-                          </div>
-                          <div class="panel-body">
-                            <table class="table table-striped table-bordered table-list">
-                              <thead>
-                                <tr>                       
-                                    <th><em class="fa fa-cog"></em></th>
-                                    <th class="hidden-xs">Title</th>
-                                    <th>Read at</th>
-                                    <th>Author</th>
-                                    <th>Category</th>
-                                </tr>  
-                              </thead>
-                             
-                              <tbody>
-                                      
-                                        {%for record in result %}
-                                        <tr>
-                                        <td align="center">
-                                          <button type = "button" class="btn btn-danger"><a href="{%url 'record_delete' record.id %}?where=user_page"><em class="fa fa-trash"></em></a></button>
-                                          
-                                        </td>
-                                        
-                                        <td class="hidden-xs">{{record.title}}</td>
-                                        <td>{{record.read_at}}</td>
-                                        <td>{{record.author}}</td>
-                                        <td>{{record.category}}</td>
-                                        </tr>
-                                        {% endfor %}
-                                      
-                                    </tbody>
-                                 
-                            </table>
-                        
-                          </div>
-                          <div class="panel-footer">
-                            <div class="row">
-                              <div class="col col-xs-4" style="text-align: right; font-weight:bolder; font-size:large">B.B.B
-                              </div>
-                              
-                            </div>
-                          </div>
-                        </div>
 
+                  <h3 class="panel-title">
+                    {{username}} 님의 독서 통장
+                  </h3>
+                  <hr>
+                </div>
+
+              </div>
+            </div>
+            <div class="panel-body">
+              <table class="table table-striped table-bordered table-list">
+                <thead>
+                  <tr>
+                    <th><em class="fa fa-cog"></em></th>
+                    <th class="hidden-xs">Title</th>
+                    <th>Read at</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+
+                  {%for record in pages %}
+                  <tr>
+                    <td align="center">
+                      <button type="button" class="btn btn-danger btn-sm"><a href="{%url 'record_delete' record.id %}"
+                          style="color: white;">DELETE</a></button>
+
+                    </td>
+
+                    <td class="hidden-xs" width=400 style="word-break:break-all">{{record.title}}</td>
+                    <td width=280 style="word-break:break-all">{{record.read_at}}</td>
+                    <td width=250 style="word-break:break-all">{{record.author}}</td>
+                    <td width=280 style="word-break:break-all">{{record.category}}</td>
+
+
+
+                  </tr>
+                  {% endfor %}
+                  {% for _ in left %}
+                  <tr>
+                    <td align="center">
+                      <button type="button" class="btn btn-danger btn-sm"><a href=""
+                          style="color: white;">DELETE</a></button>
+
+                    </td>
+
+                    <td class="hidden-xs" width=400 style="word-break:break-all"></td>
+                    <td width=280 style="word-break:break-all"></td>
+                    <td width=250 style="word-break:break-all"></td>
+                    <td width=280 style="word-break:break-all"></td>
+                    {% endfor %}
+                </tbody>
+
+              </table>
+
+            </div>
+            <div class="panel-footer">
+              <div class="row">
+                <div class="col col-xs-4" style="text-align: right; font-weight:bolder; font-size:large">B.B.B
+
+                  <!-- <button type ="button" class="btn btn-secondary btn-sm" style = "float: left; margin-top: 10px;"><a href = "{%url 'record_new'%}" style = "color: white;">글쓰기</a></button> -->
+                </div>
+              </div>
+            </div>
+            <nav aria-label="...">
+              <div class="pagination_wrapper" style="text-align: center;">
+                <ul class="pagination">
+                  {% if pages.has_previous %}
+                  <li class="page-item">
+                    <a class="page-link" href="?username={{username}}&page={{pages.previous_page_number}}" tabindex="-1"
+                      aria-disabled="false">Previous</a>
+                  </li>
+                  {% else %}
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                  </li>
+                  {% endif %}
+                  {% for i in range %}
+                  {% if i == pages.number  %}
+                  <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="?username={{username}}&page={{i}}"> {{i}} <span
+                        class="sr-only">(current)</span></a>
+                  </li>
+                  {% else %}
+                  <li class="page-item"><a class="page-link" href="?username={{username}}&page={{i}}">{{i}}</a></li>
+                  {% endif %}
+                  {% endfor %}
+                  {% if pages.has_next %}
+                  <li class="page-item">
+                    <a class="page-link" href="?username={{username}}&page={{pages.next_page_number}}">Next</a>
+                  </li>
+                  {% else %}
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#">Next</a>
+                  </li>
+                  {% endif %}
+
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
     </div>
-    {%include 'footer.html'%}
+  </div>
+  {%include 'footer.html'%}
 </body>
+
 </html>
 
 {% endblock %}
