@@ -10,7 +10,7 @@ from django.contrib import messages
 # Create your views here.
 
 def record_list(request):
-    records = ReadingRecord.objects.all()
+    records = ReadingRecord.objects.all()[::-1]
     paginator = Paginator(records, 10)
     page= request.GET.get('page')
     if page == "" or page == None:
