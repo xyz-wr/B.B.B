@@ -76,8 +76,8 @@ class ReadingRecord(models.Model):
     category = models.CharField(max_length = 100, choices = category_list) # 책 카테고리
     record_body = models.TextField()                    # 독서 기록 내용
 
-    created_at = models.DateTimeField()                 # 독서 기록 최초 일자
-    updated_at = models.DateTimeField()                 # 독서 기록 갱신 일자
+    created_at = models.DateTimeField(auto_now_add=True)                 # 독서 기록 최초 일자
+    updated_at = models.DateTimeField(auto_now=True)                 # 독서 기록 갱신 일자
 
     rep_img = models.ImageField(upload_to=date_upload_to, blank = True, default = None)
     

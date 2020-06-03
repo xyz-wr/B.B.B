@@ -28,9 +28,6 @@ def new(request):
         form = RecordForm(request.POST, request.FILES)
         if form.is_valid():
             record = form.save(commit = False)
-            record.created_at = timezone.datetime.now()
-            
-            record.updated_at = timezone.datetime.now()
             record.publisher = request.user
             record.save()
             messages.success(request,'새 독서 기록이 등록되었습니다.')
@@ -72,7 +69,6 @@ def update(request, record_id):
     update_record.read_at = request.POST['read_at']
     update_record.category = request.POST['category']
     update_record.record_body = request.POST['record_body']
-    update_record.updated_at = timezone.datetime.now()
     update_record.save()
     return redirect('record_detail', update_record.id)
 
