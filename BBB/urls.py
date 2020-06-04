@@ -13,6 +13,7 @@ urlpatterns = [
     path('account/', include('account.urls')),
     path('search/', include('search.urls')),
     path('user/', include('personal.urls')),
+    path('category/', include('category.urls')),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root':settings.MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root':settings.STATIC_ROOT}),
 ]
