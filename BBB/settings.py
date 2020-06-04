@@ -17,7 +17,7 @@ def get_secret(setting, secrets=secrets):
 SECRET_KEY = get_secret("SECRET_KEY")
 
 STATIC_URL = '/static/' 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'bookbank', 'static'), os.path.join(BASE_DIR, 'account', 'static'), os.path.join(BASE_DIR, 'search', 'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'BBB', 'static'),os.path.join(BASE_DIR, 'bookbank', 'static'), os.path.join(BASE_DIR, 'account', 'static'), os.path.join(BASE_DIR, 'search', 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
